@@ -1,5 +1,5 @@
 var Session = require('./lib/jsprof/session');
-
+var backtrace = require('./lib/jsprof/helpers');
 
 var Thing = function () { };
 
@@ -7,6 +7,10 @@ Thing.doIt = function () {
   var t = new Thing();
   t.doThings();
   t.doThing();
+
+  backtrace().forEach(function (frame) {
+    console.log(frame.getFileName() + ':' + frame.getLineNumber());
+  });
 };
 
 Thing.prototype.doThings = function () {
